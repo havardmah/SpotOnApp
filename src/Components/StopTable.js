@@ -58,9 +58,9 @@ export default class StopTable extends Component {
             )
         } else {
             const deps = this.state.deps;
-            return deps.map((dep, index) => {
+            return deps.map(dep => {
                 return (
-                    <div className="depTablesR" key={index}>
+                    <div className="depTablesR" key={dep.VehicleJourneyName}>
                         <span className="depsLines"><span className="lineNumbers">{ dep.LineRef }</span> { dep.DestinationName }</span>
                         <span className="depsExpecteds">{ calcTime(dep.MonitoredCall.ExpectedArrivalTime) }</span>
                     </div>

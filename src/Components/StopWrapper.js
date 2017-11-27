@@ -47,6 +47,7 @@ export default class StopWrapper extends Component {
             const watchId = navigator.geolocation.watchPosition(
                 position => {
                     this.setCoords(position);
+                    this.props.setError();
                 },
                 error => {
                     this.props.setError({
@@ -93,6 +94,11 @@ export default class StopWrapper extends Component {
                 });
             } catch (error) {
                 console.log(error);
+                this.props.setError({
+                    label: 'Something went wrong!',
+                    big: true,
+                    bright: true
+                })
             } // End catch
 
             this.props.setLoading(false);
@@ -102,7 +108,7 @@ export default class StopWrapper extends Component {
     constructTables = () => {
         if (this.state.data && this.state.data.length > 0) {
             const stops = this.state.data;
-            return stops.map((item, index) => <StopTable key={index} stop={item} />);
+            return stops.map(item => <StopTable key={item.ID} stop={item} />);
         }
         return null;
     }; // End constructTables
